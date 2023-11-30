@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
+import { GoalsComponent } from './components/goals/goals.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FilteredResultsComponent } from './components/filtered-results/filtered
     LoginComponent,
     ProfileComponent,
     FilterComponent,
-    FilteredResultsComponent
+    FilteredResultsComponent,
+    GoalsComponent
   ],
   imports: [
     BrowserModule,
