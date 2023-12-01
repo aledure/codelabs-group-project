@@ -9,6 +9,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
 import { GoalsComponent } from './components/goals/goals.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GoalsComponent } from './components/goals/goals.component';
     ProfileComponent,
     FilterComponent,
     FilteredResultsComponent,
-    GoalsComponent
+    GoalsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
