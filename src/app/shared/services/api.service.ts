@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Lift } from '../models/lift.model';
-import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,21 @@ export class ApiService {
   getAllLifts(): Observable<Lift[]> {
     // Specify the return type as an array of Lift
     return this.http.get<Lift[]>(
-      `https://${this.apiUrl}/exercises?offset=0&limit=5`,
+      `https://${this.apiUrl}/exercises?offset=0&limit=20`,
+      this.getHeaders()
+    );
+  }
+
+  getLiftsByMuscle(bodyPart: string): Observable<Lift[]> {
+    return this.http.get<Lift[]>(
+      `https://${this.apiUrl}/exercises/bodyPart/${bodyPart}?offset=0&limit=20`,
+      this.getHeaders()
+    );
+  }
+
+  getLiftsByEquipment(equipment: string): Observable<Lift[]> {
+    return this.http.get<Lift[]>(
+      `https://${this.apiUrl}/exercises/equipment/${equipment}?offset=0&limit=20`,
       this.getHeaders()
     );
   }
