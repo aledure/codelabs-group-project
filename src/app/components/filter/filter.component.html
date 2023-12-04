@@ -1,4 +1,4 @@
-<div class="main-container mt-4">
+<div class="main-container">
   <div class="row">
     <div class="col-md-12">
       <input type="text" class="form-control search-bar" placeholder="Search...">
@@ -46,11 +46,11 @@
     <ul>
       <li *ngFor="let lift of lifts">
         <span>
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
             viewBox="0 0 16 16">
             <path
               d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-          </svg> -->
+          </svg>
           {{ lift.name | titlecase}}
         </span>
       </li>
