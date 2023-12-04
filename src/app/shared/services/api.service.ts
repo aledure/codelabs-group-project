@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Lift } from '../models/lift.model';
-import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -25,28 +25,24 @@ export class ApiService {
   }
 
   getAllLifts(): Observable<Lift[]> {
-    const storedLifts = localStorage.getItem('lifts');
+    // Specify the return type as an array of Lift
+    return this.http.get<Lift[]>(
+      `https://${this.apiUrl}/exercises?offset=0&limit=20`,
+      this.getHeaders()
+    );
+  }
 
-    if (storedLifts) {
-      // Data is present in local storage, return it as an Observable
-      return of(JSON.parse(storedLifts));
-    } else {
-      // Data is not present in local storage, make the API call
-      return this.http
-        .get<Lift[]>(
-          `https://${this.apiUrl}/exercises?offset=0&limit=500`,
-          this.getHeaders()
-        )
-        .pipe(
-          tap((lifts) => {
-            // Save the API response to local storage
-            localStorage.setItem('lifts', JSON.stringify(lifts));
-          }),
-          catchError((error) => {
-            console.error('Error fetching lifts:', error);
-            return of([] as Lift[]);
-          })
-        );
-    }
+  getLiftsByMuscle(bodyPart: string): Observable<Lift[]> {
+    return this.http.get<Lift[]>(
+      `https://${this.apiUrl}/exercises/bodyPart/${bodyPart}?offset=0&limit=20`,
+      this.getHeaders()
+    );
+  }
+
+  getLiftsByEquipment(equipment: string): Observable<Lift[]> {
+    return this.http.get<Lift[]>(
+      `https://${this.apiUrl}/exercises/equipment/${equipment}?offset=0&limit=20`,
+      this.getHeaders()
+    );
   }
 }

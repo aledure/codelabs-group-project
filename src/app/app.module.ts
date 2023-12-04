@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -10,6 +10,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
 import { GoalsComponent } from './components/goals/goals.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     GoalsComponent,
     NavbarComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

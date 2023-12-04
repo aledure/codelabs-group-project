@@ -1,9 +1,59 @@
-<div class="row">
-  <div class="col-xs-6">
-    <input type="text" id="searchTerm" placeholder="Search">
-    <button class="btn btn-success" id="submit">Search</button>
+<div class="main-container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <input type="text" class="form-control search-bar" placeholder="Search...">
+    </div>
+    <div class="row filter-row">
+      <div class="col-md-4">
+        <label for="bodyPart">Filter by Muscle Group:</label>
+        <select id="bodyPart" [(ngModel)]="selectedBodyPart" name="bodyPart" (change)="onBodyPartSelected()"
+          class="form-control dropdown-toggle" data-toggle="dropdown" aria-placeholder="Select Muscle Group">
+          <option>All</option>
+          <option>Back</option>
+          <option>Chest</option>
+          <option>Lower Arms</option>
+          <option>Upper Arms</option>
+          <option>Chest</option>
+          <option>Lower Legs</option>
+          <option>Upper Legs</option>
+          <option>Waist</option>
+          <option>Shoulders</option>
+          <option>Cardio</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="bodyPart">Filter by Equipment:</label>
+        <select class="form-control dropdown-toggle" [(ngModel)]="selectedEquipment" (change)="onEquipmentSelected()"
+          id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          aria-placeholder="Select Equipment">
+          <option>Select Equipment</option>
+          <option>Body weight</option>
+          <option>Dumbbell</option>
+          <option>Barbell</option>
+          <option>Leverage Machine</option>
+          <option>Band</option>
+          <option>Cable</option>
+          <option>Bosu Ball</option>
+          <option>Kettlebell</option>
+        </select>
+      </div>
+    </div>
   </div>
-  <div class="col-xs-6">
 
+
+
+  <div *ngIf="lifts.length != 0">
+    <ul>
+      <li *ngFor="let lift of lifts">
+        <span>
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+          </svg> -->
+          {{ lift.name | titlecase}}
+        </span>
+      </li>
+    </ul>
   </div>
 </div>

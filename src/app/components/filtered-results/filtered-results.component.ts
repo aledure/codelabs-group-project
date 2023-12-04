@@ -13,12 +13,17 @@ export class FilteredResultsComponent {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.getLifts().subscribe((lifts) => {
-      this.lifts = lifts;
-    });
+    this.fetchLiftsData();
   }
 
-  getLifts() {
-    return this.apiService.getAllLifts();
+  fetchLiftsData() {
+    this.apiService.getAllLifts().subscribe(
+      (data) => {
+        this.lifts = data; // Store the fetched data in the property
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
 }
