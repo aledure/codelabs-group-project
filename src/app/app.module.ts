@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -9,8 +10,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
 import { GoalsComponent } from './components/goals/goals.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { AuthComponent } from './shared/auth/auth.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
+import { AuthGuard } from './shared/auth/auth-guard/auth-guard.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +27,14 @@ import { FormsModule } from '@angular/forms';
     GoalsComponent,
     NavbarComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
