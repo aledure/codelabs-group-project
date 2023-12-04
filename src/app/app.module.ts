@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
+import { AuthComponent } from './shared/auth/auth.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -11,10 +11,9 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
 import { GoalsComponent } from './components/goals/goals.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { AuthComponent } from './shared/auth/auth.component';
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
-import { AuthGuard } from './shared/auth/auth-guard/auth-guard.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +25,7 @@ import { AuthGuard } from './shared/auth/auth-guard/auth-guard.component';
     FilteredResultsComponent,
     GoalsComponent,
     NavbarComponent,
+    AuthComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
