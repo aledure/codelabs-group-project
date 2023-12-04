@@ -9,9 +9,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
 import { GoalsComponent } from './components/goals/goals.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AuthComponent } from './shared/auth/auth.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
+import { AuthGuard } from './shared/auth/auth-guard/auth-guard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
     AuthComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

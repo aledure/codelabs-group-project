@@ -21,31 +21,21 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item" *ngIf="isAuthenticated">
         <a class="nav-link h2" routerLink="/home" routerLinkActive="active"
           >Home</a
         >
       </li>
-      <li class="nav-item active">
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link h2" routerLink="/goals" routerLinkActive="active"
+          >Goals</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated" (click)="onSignOut()">
         <a class="nav-link h2" routerLink="/login" routerLinkActive="active"
-          >Login</a
+          >Sign Out</a
         >
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0 search">
-      <input
-        class="form-control mr-sm-2 searchField"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-
-      <button
-        class="btn btn-outline-dark my-2 my-sm-0 searchButton"
-        type="submit"
-      >
-        Search
-      </button>
-    </form>
   </div>
 </nav>

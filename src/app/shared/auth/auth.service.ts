@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
+import { User } from './user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponseData {
   kind: string;
@@ -23,7 +25,11 @@ const SIGN_IN_URL =
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  currentUser = new BehaviorSubject<User>(null);
+
+  userToken: string = null;
 
   signUp(email: string, password: string) {
     return this.http
@@ -56,6 +62,19 @@ export class AuthService {
   }
 
   handleAuth(email: string, userId: string, token: string, expiresIn: number) {
+    // Token Expiration
     const expDate = new Date(new Date().getTime() + expiresIn * 1000);
+
+    // Create a new user based on the info passed in the form and emit that user
+    const formUser = new User(email, userId, token, expDate);
+    this.currentUser.next(formUser);
+
+    // Save the new user in localStorage
+    localStorage.setItem('userData', JSON.stringify(formUser));
+  }
+
+  signOut() {
+    this.currentUser.next(null);
+    this.router.navigate(['auth']);
   }
 }
