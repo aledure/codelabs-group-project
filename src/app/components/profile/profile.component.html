@@ -1,8 +1,65 @@
-<div class="col-sm-12" style="margin-left: 1em;">
-  <div class="row">
-    [username]
-  </div>
-  <div class="row">
+<div class="background-div">
+  <div class="container">
+    <div class="text-center">
+      <img src="/assets/user-default.jpg" alt="Profile Picture" class="img-fluid rounded-circle"
+        style="width: 10em; height: 10em;">
+      <h1 class="mt-2 username">Username</h1>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row mt-4">
+      <h3 class="text-center">Routines</h3>
+      <div class="col-12 routine-container">
 
-  </div>
-</div>
+
+        <mat-card class="routine-card">
+          <mat-card-header>
+            <mat-card-title>[Legs]</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="text-center my-auto">
+            <p>Squat</p>
+            <p>Leg Press</p>
+            <p>Calf Raise</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Start</button>
+            <button mat-button>View</button>
+            <button mat-button>Share</button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="routine-card">
+          <mat-card-header>
+            <mat-card-title>[Arms]</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="text-center my-auto">
+            <p>Bicep Curl</p>
+            <p>Bench Press</p>
+            <p>Dumbell Fly</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Start</button>
+            <button mat-button>View</button>
+            <button mat-button>Share</button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="routine-card">
+          <mat-card-header>
+            <mat-card-title>[Cardio]</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="text-center my-auto">
+            <p>Run: 4m</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>Start</button>
+            <button mat-button>View</button>
+            <button mat-button>Share</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+      <div class="col-xs-12 add-routine-container">
+        <img src="/assets/plus.png" alt="Profile Picture" class="img-fluid rounded-circle add-icon"
+          style="width: 100px; height: 100px;">
+      </div>
+    </div>

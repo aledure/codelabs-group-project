@@ -10,7 +10,7 @@ import { FilterComponent } from './components/filter/filter.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent },
   { path: 'goals', component: GoalsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'results', component: FilterComponent },
