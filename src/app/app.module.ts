@@ -17,6 +17,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LiftDetailComponent } from './components/lift-detail/lift-detail.component';
+import { SearchPipe } from './shared/pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GoalsComponent,
     NavbarComponent,
     AuthComponent,
+    LiftDetailComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

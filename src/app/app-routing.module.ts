@@ -6,6 +6,7 @@ import { GoalsComponent } from './components/goals/goals.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './shared/auth/auth-guard/auth-guard.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { LiftDetailComponent } from './components/lift-detail/lift-detail.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,6 +15,10 @@ const appRoutes: Routes = [
   { path: 'goals', component: GoalsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'results', component: FilterComponent },
+  {
+    path: 'lift/:id',
+    component: LiftDetailComponent,
+  },
 ];
 
 @NgModule({
