@@ -18,6 +18,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LiftDetailComponent } from './components/lift-detail/lift-detail.component';
+import { SearchPipe } from './shared/pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LiftDetailComponent } from './components/lift-detail/lift-detail.compon
     NavbarComponent,
     AuthComponent,
     LiftDetailComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

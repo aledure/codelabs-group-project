@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Lift } from '../../shared/models/lift.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SearchPipe } from '../../shared/pipes/search.pipe';
 
 @Component({
   selector: 'app-filter',
@@ -12,6 +13,8 @@ export class FilterComponent {
   lifts: Lift[] = [];
   selectedBodyPart: string = '';
   selectedEquipment: string = '';
+  liftsList: any[] = [];
+  searchQuery: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -22,7 +25,8 @@ export class FilterComponent {
   fetchLiftsData() {
     this.apiService.getAllLifts().subscribe(
       (data) => {
-        this.lifts = data; // Store the fetched data in the property
+        this.lifts = data;
+        console.log(this.lifts);
       },
       (error) => {
         console.error('Error fetching data:', error);

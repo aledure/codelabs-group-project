@@ -1,5 +1,9 @@
 .mainnav {
   background: rgb(10, 115, 156);
+  width: 100vw;
+  position: fixed;
+  z-index: 1;
+  height: 10vh;
 }
 
 /* Component Buttons */

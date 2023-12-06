@@ -3,38 +3,22 @@
   <a class="navbar-brand" routerLink="/profile" routerLinkActive="active">
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/1024px-Windows_10_Default_Profile_Picture.svg.png?20221210150350"
-      width="60px"
-      height="60px"
-      class="profileImage"
-    />
+      width="auto" height="50px" class="profileImage" />
   </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarText"
-    aria-controls="navbarText"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link h2" routerLink="/home" routerLinkActive="active"
-          >Home</a
-        >
+        <a class="nav-link h2" routerLink="/home" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link h2" routerLink="/goals" routerLinkActive="active"
-          >Goals</a
-        >
+        <a class="nav-link h2" routerLink="/goals" routerLinkActive="active">Goals</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated" (click)="onSignOut()">
-        <a class="nav-link h2" routerLink="/login" routerLinkActive="active"
-          >Sign Out</a
-        >
+        <a class="nav-link h2" routerLink="/login" routerLinkActive="active">Sign Out</a>
       </li>
     </ul>
   </div>

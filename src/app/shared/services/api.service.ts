@@ -11,7 +11,7 @@ import { Lift } from '../models/lift.model';
 export class ApiService {
   private apiUrl = environment.apiUrl;
   private apiKey = environment.apiKey;
-  private cache: Lift[] | null = null;
+  private cache = new Map<string, any>();
 
   constructor(private http: HttpClient) {}
 
@@ -26,20 +26,22 @@ export class ApiService {
   }
 
   getAllLifts(): Observable<Lift[]> {
-    if (this.cache) {
-      // If data is available in the cache, return it
-      console.log('Returning cached data:', this.cache);
-      return of(this.cache);
+    const cacheKey = 'allLifts';
+
+    // If data is available in the cache, return it
+    if (this.cache.has(cacheKey)) {
+      console.log('Returning cached data:', this.cache.get(cacheKey));
+      return of(this.cache.get(cacheKey));
     } else {
       // If data is not in the cache, make an API request
       return this.http
         .get<Lift[]>(
-          `https://${this.apiUrl}/exercises?offset=0&limit=50`,
+          `https://${this.apiUrl}/exercises?offset=0&limit=100`,
           this.getHeaders()
         )
         .pipe(
           tap((data) => {
-            this.cache = data;
+            this.cache.set(cacheKey, data);
           }),
           catchError((error) => {
             console.error('Error fetching data from API:', error);
@@ -50,10 +52,26 @@ export class ApiService {
   }
 
   getLiftDetails(id: number): Observable<Lift> {
-    return this.http.get<Lift>(
-      `https://${this.apiUrl}/exercises/exercise/${id}`,
-      this.getHeaders()
-    );
+    const cacheKey = `lift-${id}`;
+    // If data is available in the cache, return it
+    if (this.cache.has(cacheKey)) {
+      return of(this.cache.get(cacheKey));
+    } else {
+      return this.http
+        .get<Lift>(
+          `https://${this.apiUrl}/exercises/exercise/${id}`,
+          this.getHeaders()
+        )
+        .pipe(
+          tap((data) => {
+            this.cache.set(cacheKey, data);
+          }),
+          catchError((error) => {
+            console.error('Error fetching data from API:', error);
+            return of({} as Lift);
+          })
+        );
+    }
   }
 
   getLiftsByMuscle(bodyPart: string): Observable<Lift[]> {
