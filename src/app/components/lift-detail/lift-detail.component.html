@@ -1,0 +1,21 @@
+<div class="main-container">
+  <mat-card *ngIf="liftDetails" class="detail-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>{{liftDetails.name | titlecase}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mati-divider></mati-divider>
+    <mat-card-content>
+      <div class="row mt-4">
+        <div class="col-xs-12 col-md-6 text-container">
+          <p class="text-center">Muscle Group: {{ liftDetails.bodyPart | titlecase}}</p>
+          <p>{{ liftDetails.instructions}}</p>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <img src="{{liftDetails.gifUrl}}" alt="{{ liftDetails.name }}" class="lift-img" loading="lazy" />
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

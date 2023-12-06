@@ -1,8 +1,5 @@
 <div class="main-container">
   <div class="row">
-    <div class="col-md-12">
-      <input type="text" class="form-control search-bar" placeholder="Search...">
-    </div>
     <div class="row filter-row">
       <div class="col-md-4">
         <label for="bodyPart">Filter by Muscle Group:</label>
@@ -21,6 +18,7 @@
           <option>Cardio</option>
         </select>
       </div>
+
       <div class="col-md-4">
         <label for="bodyPart">Filter by Equipment:</label>
         <select class="form-control dropdown-toggle" [(ngModel)]="selectedEquipment" (change)="onEquipmentSelected()"
@@ -40,19 +38,28 @@
     </div>
   </div>
 
+  <mat-card class="mt-4">
+    <div class="col-md-12 mt-2">
+      <input type="text" class="form-control search-bar" placeholder="Search...">
+    </div>
+    <div *ngIf="lifts.length != 0">
+      <ul class="mt-4">
+        <li *ngFor="let lift of lifts">
+          <span style="color: black;">
+            <img src="/assets/plus.png" alt="Add" class="img-fluid rounded-circle add-icon"
+              style="width: 20px; height: 20px;">
+            <a [routerLink]="['/lift', lift.id]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
+                class="bi bi-search detail-icon" viewBox="0 0 16 16">
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+              </svg>
+            </a>
+            {{ lift.name | titlecase}}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </mat-card>
 
-  <div *ngIf="lifts.length != 0">
-    <ul>
-      <li *ngFor="let lift of lifts">
-        <span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
-            viewBox="0 0 16 16">
-            <path
-              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-          </svg>
-          {{ lift.name | titlecase}}
-        </span>
-      </li>
-    </ul>
-  </div>
 </div>

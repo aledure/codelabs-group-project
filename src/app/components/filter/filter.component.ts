@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Lift } from '../../shared/models/lift.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -12,7 +13,7 @@ export class FilterComponent {
   selectedBodyPart: string = '';
   selectedEquipment: string = '';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
     this.fetchLiftsData();
@@ -49,5 +50,9 @@ export class FilterComponent {
           console.log(this.lifts);
         });
     }
+  }
+
+  navigateToLift(id: number): void {
+    this.router.navigate(['/lift', id]);
   }
 }
