@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -14,17 +15,14 @@ export class NavbarComponent {
 
   constructor(
     private httpService: HttpService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe((user) => {
       this.isAuthenticated = !!user;
+      console.log(user);
     });
-  }
-
-  ngOnDestroy(): void {
-    this.authService.currentUser.unsubscribe();
   }
 
   onSignOut() {

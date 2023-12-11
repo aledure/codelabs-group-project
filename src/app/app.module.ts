@@ -11,9 +11,9 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FilteredResultsComponent } from './components/filtered-results/filtered-results.component';
 import { GoalsComponent } from './components/goals/goals.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
     GoalsComponent,
     NavbarComponent,
     AuthComponent,
+    LandingComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
