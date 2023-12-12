@@ -1,41 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-light mainnav">
-  <!-- Use the profile img to access profile page -->
-  <a class="navbar-brand" routerLink="/profile" routerLinkActive="active">
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/1024px-Windows_10_Default_Profile_Picture.svg.png?20221210150350"
-      width="60px"
-      height="60px"
-      class="profileImage"
-    />
-  </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarText"
-    aria-controls="navbarText"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
+<div class="w-full max-h-[10vh] bg-customBlue border-b-4 border-b-customBlack">
+  <div
+    x-data="{ open: false }"
+    class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row"
   >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link h2" routerLink="/home" routerLinkActive="active"
-          >Home</a
-        >
-      </li>
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a class="nav-link h2" routerLink="/goals" routerLinkActive="active"
-          >Goals</a
-        >
-      </li>
-      <li class="nav-item" *ngIf="isAuthenticated" (click)="onSignOut()">
-        <a class="nav-link h2" routerLink="/login" routerLinkActive="active"
-          >Sign Out</a
-        >
-      </li>
-    </ul>
+    <div class="flex flex-row items-center justify-between">
+      <a
+        routerLink="/profile"
+        routerLinkActive="active"
+        class="tracking-widest rounded-lg focus:shadow-outline"
+        ><img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/1024px-Windows_10_Default_Profile_Picture.svg.png?20221210150350"
+          width="50rem"
+          height="50rem"
+          class="profileImage"
+      /></a>
+      <button
+        class="md:hidden rounded-lg focus:outline-none focus:shadow-outline"
+      >
+        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+          <path x-show="!open" fill-rule="evenodd" clip-rule="evenodd"></path>
+          <path x-show="open" fill-rule="evenodd" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <nav
+      :class="{'flex': open, 'hidden': !open}"
+      class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-start md:flex-row"
+    >
+      <a
+        tabindex="0"
+        class="px-4 py-2 mt-2 text-5xl font-semibold text-customBlack bg-gray-200 rounded-lg hover:text-customWhite active:bg-customBlack"
+        routerLink="/home"
+        routerLinkActive="active"
+        >Home</a
+      >
+      <a
+        class="px-4 py-2 mt-2 text-5xl font-semibold text-customBlack bg-gray-200 rounded-lg hover:text-customWhite active:bg-customBlack"
+        routerLink="/goals"
+        routerLinkActive="active"
+        >Goals</a
+      >
+      <a
+        class="px-4 py-2 mt-2 text-5xl font-semibold text-customBlack bg-gray-200 rounded-lg hover:text-customWhite active:bg-customBlack"
+        routerLink="/results"
+        routerLinkActive="active"
+        >Results</a
+      >
+      <a
+        class="px-4 py-2 mt-2 text-5xl font-semibold text-customBlack bg-gray-200 rounded-lg hover:text-customWhite active:bg-customBlack"
+        routerLink="/login"
+        routerLinkActive="active"
+        >Sign Out</a
+      >
+    </nav>
   </div>
-</nav>
+</div>
