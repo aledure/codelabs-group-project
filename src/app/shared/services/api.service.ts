@@ -51,9 +51,10 @@ export class ApiService {
     }
   }
 
-  getLiftDetails(id: number): Observable<Lift> {
+  getLiftDetails(id: string): Observable<Lift> {
     const cacheKey = `lift-${id}`;
     // If data is available in the cache, return it
+
     if (this.cache.has(cacheKey)) {
       return of(this.cache.get(cacheKey));
     } else {
@@ -64,6 +65,8 @@ export class ApiService {
         )
         .pipe(
           tap((data) => {
+            console.log(id);
+            console.log('Data from API:', data);
             this.cache.set(cacheKey, data);
           }),
           catchError((error) => {
@@ -76,14 +79,14 @@ export class ApiService {
 
   getLiftsByMuscle(bodyPart: string): Observable<Lift[]> {
     return this.http.get<Lift[]>(
-      `https://${this.apiUrl}/exercises/bodyPart/${bodyPart}?offset=0&limit=20`,
+      `https://${this.apiUrl}/exercises/bodyPart/${bodyPart}?offset=0&limit=100`,
       this.getHeaders()
     );
   }
 
   getLiftsByEquipment(equipment: string): Observable<Lift[]> {
     return this.http.get<Lift[]>(
-      `https://${this.apiUrl}/exercises/equipment/${equipment}?offset=0&limit=20`,
+      `https://${this.apiUrl}/exercises/equipment/${equipment}?offset=0&limit=100`,
       this.getHeaders()
     );
   }

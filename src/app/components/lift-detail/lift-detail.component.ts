@@ -20,8 +20,7 @@ export class LiftDetailComponent implements OnInit {
       console.log('id or name:', idOrName);
 
       if (idOrName) {
-        const id = Number(idOrName); // Convert idOrName to a number
-        this.apiService.getLiftDetails(id).subscribe(
+        this.apiService.getLiftDetails(idOrName).subscribe(
           (data: Lift) => {
             this.liftDetails = data;
           },

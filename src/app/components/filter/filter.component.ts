@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Lift } from '../../shared/models/lift.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SearchPipe } from '../../shared/pipes/search.pipe';
+import { RoutineService } from 'src/app/shared/services/routine.service';
+import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
   selector: 'app-filter',
@@ -16,7 +17,11 @@ export class FilterComponent {
   liftsList: any[] = [];
   searchQuery: string = '';
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private routineService: RoutineService
+  ) {}
 
   ngOnInit() {
     this.fetchLiftsData();
@@ -56,7 +61,7 @@ export class FilterComponent {
     }
   }
 
-  navigateToLift(id: number): void {
+  navigateToLift(id: number) {
     this.router.navigate(['/lift', id]);
   }
 }

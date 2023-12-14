@@ -25,8 +25,20 @@ const SIGN_IN_URL =
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
-
+  constructor(private http: HttpClient, private router: Router) {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      this.currentUser.next(
+        new User(
+          parsedUserData.email,
+          parsedUserData.userId,
+          parsedUserData.token,
+          new Date(parsedUserData.tokenExpiration)
+        )
+      );
+    }
+  }
   currentUser = new BehaviorSubject<User>(null);
 
   userToken: string = null;
@@ -46,6 +58,12 @@ export class AuthService {
       );
   }
 
+  isAuthenticated = () => !!this.currentUser.value;
+
+  getCurrentUser() {
+    return this.currentUser.value;
+  }
+
   signIn(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(SIGN_IN_URL + AUTH_API_KEY, {
@@ -63,7 +81,9 @@ export class AuthService {
 
   handleAuth(email: string, userId: string, token: string, expiresIn: number) {
     // Token Expiration
-    const expDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const expDate = new Date(
+      new Date().getTime() + expiresIn * 1000 * 60 * 60 * 24 * 3
+    );
 
     // Create a new user based on the info passed in the form and emit that user
     const formUser = new User(email, userId, token, expDate);
@@ -71,6 +91,7 @@ export class AuthService {
 
     // Save the new user in localStorage
     localStorage.setItem('userData', JSON.stringify(formUser));
+    console.log(localStorage.getItem('userData'));
   }
 
   signOut() {

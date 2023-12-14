@@ -3,12 +3,17 @@
   display: flex;
   justify-content: center;
   padding: 4em;
+
 }
 
 .container {
   background-color: #ecebf3;
   padding: 4em;
   border-radius: 10px;
+}
+
+.img-fluid {
+  margin: 0 auto;
 }
 
 .username {

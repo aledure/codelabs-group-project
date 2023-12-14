@@ -39,14 +39,14 @@
   </div>
 
   <mat-card class="mt-4">
-    <div class="col-md-12 mt-2 search-menu">
+    <div class="col-md-10 mt-2 search-menu">
       <input type="text" class="form-control search-bar" [(ngModel)]="searchQuery" placeholder="Search...">
       <button class="btn search-button">Search</button>
     </div>
     <div *ngIf="lifts.length != 0" class="lifts-list">
       <ul class="mt-4">
         <li *ngFor="let lift of lifts | search: searchQuery">
-          <span style="color: black;">
+          <span style="color: black;" class="lifts-row">
             <img src="/assets/plus.png" alt="Add" class="img-fluid rounded-circle add-icon"
               style="width: 20px; height: 20px;">
             <a [routerLink]="['/lift', lift.id]">
