@@ -19,6 +19,7 @@ import { AuthInterceptorService } from './shared/auth/auth-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LiftDetailComponent } from './components/lift-detail/lift-detail.component';
 import { SearchPipe } from './shared/pipes/search.pipe';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SearchPipe } from './shared/pipes/search.pipe';
     AuthComponent,
     LiftDetailComponent,
     SearchPipe,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,
