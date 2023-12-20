@@ -1,64 +1,38 @@
 <div class="background-div">
-  <div class="container mt-20">
+  <div class="container mt-5" style="margin-top: 1em;">
     <div class="text-center">
       <img src="/assets/user-default.jpg" alt="Profile Picture" class="img-fluid rounded-circle"
         style="width: 10em; height: 10em;">
-      <h1 class="mt-2 username">Username</h1>
+      <h1 class="mt-2 username">Welcome, {{ currentUser.email }}!</h1>
     </div>
     <mat-divider></mat-divider>
     <div class="row mt-4">
-      <h3 class="text-center">Routines</h3>
+      <h3 class="text-center">Your Routines:</h3>
       <div class="col-12 routine-container">
 
-        <mat-card class="routine-card">
-          <mat-card-header>
-            <mat-card-title>[Legs]</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="text-center my-auto">
-            <p>Squat</p>
-            <p>Leg Press</p>
-            <p>Calf Raise</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>Start</button>
-            <button mat-button>View</button>
-            <button mat-button>Share</button>
-          </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="routine-card">
-          <mat-card-header>
-            <mat-card-title>[Arms]</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="text-center my-auto">
-            <p>Bicep Curl</p>
-            <p>Bench Press</p>
-            <p>Dumbell Fly</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>Start</button>
-            <button mat-button>View</button>
-            <button mat-button>Share</button>
-          </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="routine-card">
-          <mat-card-header>
-            <mat-card-title>[Cardio]</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="text-center my-auto">
-            <p>Run: 4m</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>Start</button>
-            <button mat-button>View</button>
-            <button mat-button>Share</button>
-          </mat-card-actions>
-        </mat-card>
+        <div *ngFor="let savedRoutine of savedRoutines">
+          <mat-card class="routine-card">
+            <mat-card-header>
+              <mat-card-title>{{ savedRoutine.title | titlecase }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="text-center my-auto">
+              <div *ngFor="let lift of savedRoutine.lifts.slice(0, 3)">
+                <p style="font-size: 12px; padding: 0;">{{ lift.name | titlecase }}</p>
+              </div>
+              <p>...</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button [routerLink]="['/start', savedRoutine.id]">Start</button>
+              <button mat-button (click)="editRoutine(savedRoutine)">Edit</button>
+              <button mat-button (click)="deleteRoutine(savedRoutine)">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
 
       </div>
       <div class="col-xs-12 add-routine-container">
-        <img src="/assets/plus.png" alt="Profile Picture" class="img-fluid rounded-circle add-icon"
-          style="width: 100px; height: 100px;">
+
+        <img src="/assets/plus.png" matTooltip="Create a new routine" alt="Profile Picture"
+          class="img-fluid rounded-circle add-icon" style="width: 80px; height: 80px;" routerLink="/routines/new">
       </div>
     </div>

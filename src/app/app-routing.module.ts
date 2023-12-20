@@ -7,7 +7,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './shared/auth/auth-guard/auth-guard.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { LiftDetailComponent } from './components/lift-detail/lift-detail.component';
-import { RoutineManagerComponent } from './components/routine-manager/routine-manager.component';
+import { EditRoutineComponent } from './components/edit-routine/edit-routine.component';
+import { ActiveRoutineComponent } from './components/active-routine/active-routine.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,8 +16,10 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'goals', component: GoalsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'results', component: FilterComponent },
-  { path: 'routine-manager', component: RoutineManagerComponent },
+  { path: 'routines/new', component: FilterComponent },
+  { path: 'edit/:id', component: EditRoutineComponent },
+  { path: 'start/:id', component: ActiveRoutineComponent },
+
   {
     path: 'lift/:id',
     component: LiftDetailComponent,

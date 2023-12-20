@@ -6,7 +6,7 @@ export class Lift {
   bodyPart: string;
   equipment: string;
   gifUrl?: string;
-  instructions: string;
+  instructions?: string;
 
   constructor(
     name: string,

@@ -1,33 +1,52 @@
 .mainnav {
-  background: rgb(10, 115, 156);
+  background: #839D9A;
   width: 100vw;
   position: fixed;
   z-index: 1;
   height: 10vh;
 }
 
-/* Component Buttons */
+.links-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+}
+
 li {
-  font-size: 50px;
+  list-style-type: none;
+  padding: 0 10px 0 10px;
+  margin-top: 5px;
+  color: white;
+  font-size: 20px;
 }
 
-/* Search Inputs */
-.search {
-  display: flex;
+a {
+  text-decoration: none;
+  color: white;
 }
 
-.searchField {
-  display: flex;
+a:hover {
+  color: black;
+  scale: 1.1;
+  transition: 0.7s;
 }
 
-.searchButton {
-  width: 10vh;
-  margin-left: 10px;
-  justify-content: center;
-}
+
 
 /* Profile */
 
 .profileImage {
   margin-left: 10px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  ul {
+    padding-right: 20px;
+  }
+
+  li {
+    font-size: 15px;
+  }
 }

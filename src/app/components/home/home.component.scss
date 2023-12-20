@@ -1,0 +1,148 @@
+.main-header {
+  height: 60vh;
+  background-image: url('/assets/deadlift.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-container {
+  overflow-x: hidden;
+  margin-top: 4em;
+}
+
+.main-header-text {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  width: 50vw;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 45vw;
+}
+
+.header-button {
+  padding: 1em;
+  margin: 1em;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.5rem;
+  background-color: #F75C03;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.info-container h3 {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.info-container p {
+  font-weight: 300;
+}
+
+.bold-text {
+  font-weight: 600;
+}
+
+.site-desc-container,
+.benefits-container {
+  display: flex;
+  flex-direction: column;
+  color: #ECEBF3;
+  height: 50vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-desc-container {
+  background-color: #0B2027;
+  padding: 2em;
+}
+
+
+.benefits-container {
+  padding: 1em;
+  background-color: #0B2027;
+  padding-right: 1em;
+}
+
+.benefits-container .bold-text {
+  letter-spacing: 1px;
+  padding-left: 1em;
+}
+
+
+.img-container {
+  background-image: url('/assets/barbell.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50vw;
+  height: 50vh;
+}
+
+.left-img-container {
+  background-image: url('/assets/pullup.jpg');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 50vw;
+  height: 50vh;
+}
+
+.footer {
+  background-color: #0B2027;
+  color: #ECEBF3;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-button {
+  background-color: #f75c03;
+  font-weight: 400;
+}
+
+.text-container {
+  width: 70%;
+}
+
+
+
+@media screen and (max-width: 767px) {
+
+  .img-container,
+  .left-img-container {
+    width: 100vw;
+    height: 50vh;
+  }
+
+  .benefits-container,
+  .site-desc-container p {
+    font-size: 3.5vw;
+  }
+
+  .benefits-container {
+    order: -1;
+  }
+}

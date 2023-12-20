@@ -1,32 +1,42 @@
 import { Injectable } from '@angular/core';
+import { Lift } from '../models/lift.model';
+import { Subject } from 'rxjs';
+import { Routine } from '../models/routine.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoutineService {
   localStorageKey = 'routines';
+  private routine: Routine[] = [];
+  public lifts: Lift[] = [];
 
-  getRoutines(): any[] {
-    return JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
+  public liftSelectedSource = new Subject<Lift>();
+
+  liftSelected$ = this.liftSelectedSource.asObservable();
+
+  getRoutineById(id: number): Observable<Routine> {
+    const routinesString = localStorage.getItem(this.localStorageKey);
+    const routines = routinesString ? JSON.parse(routinesString) : {};
+    const routine = routines[id];
+    return of(routine);
   }
 
-  addRoutine(routine: any): void {
-    const routines = this.getRoutines();
-    routines.push(routine);
-    localStorage.setItem(this.localStorageKey, JSON.stringify(routines));
+  selectLift(lift: Lift): void {
+    this.liftSelectedSource.next(lift);
+    this.lifts.push(lift);
+    this.updateLocalStorage();
+    console.log(
+      lift.name +
+        ' has been added to your routine. ' +
+        this.lifts.length +
+        ' lifts in routine.'
+    );
   }
 
-  updateRoutine(routine: any): void {
-    const routines = this.getRoutines();
-    const index = routines.findIndex((r) => r.id === routine.id);
-    routines[index] = routine;
-    localStorage.setItem(this.localStorageKey, JSON.stringify(routines));
-  }
-
-  deleteRoutine(routine: any): void {
-    const routines = this.getRoutines();
-    const index = routines.findIndex((r) => r.id === routine.id);
-    routines.splice(index, 1);
-    localStorage.setItem(this.localStorageKey, JSON.stringify(routines));
+  private updateLocalStorage(): void {
+    localStorage.setItem('routine', JSON.stringify(this.routine));
+    console.log();
   }
 }

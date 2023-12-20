@@ -34,7 +34,8 @@ export class AuthService {
           parsedUserData.email,
           parsedUserData.userId,
           parsedUserData.token,
-          new Date(parsedUserData.tokenExpiration)
+          new Date(parsedUserData.tokenExpiration),
+          parsedUserData.routines
         )
       );
     }
@@ -86,7 +87,7 @@ export class AuthService {
     );
 
     // Create a new user based on the info passed in the form and emit that user
-    const formUser = new User(email, userId, token, expDate);
+    const formUser = new User(email, userId, token, expDate, []);
     this.currentUser.next(formUser);
 
     // Save the new user in localStorage

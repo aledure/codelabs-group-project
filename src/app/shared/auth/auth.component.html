@@ -1,29 +1,32 @@
-<div class="row" style="padding: 6em;">
-  <div class="col-xs-12 col-md-6 offset-md-3">
-    <form #authFormRef="ngForm" (ngSubmit)="onAuthFormSubmit(authFormRef)">
-      <!-- EMAIL -->
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" class="form-control" email ngModel required />
-      </div>
+<div class="login-container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 card">
+      <form #authFormRef="ngForm" (ngSubmit)="onAuthFormSubmit(authFormRef)">
+        <!-- EMAIL -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" email ngModel required />
+        </div>
 
-      <!-- PASSWORD -->
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" class="form-control" minlength="6" ngModel required />
-      </div>
+        <!-- PASSWORD -->
+        <div class="form-group mt-4">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" minlength="6" ngModel required />
+        </div>
 
-      <!-- BUTTONS -->
-      <button class="btn btn-primary" type="submit" [disabled]="!authFormRef.valid">
-        {{ isLoginMode ? "Sign In" : "Sign Up" }}
-      </button>
-      |
-      <button class="btn btn-primary" type="button" (click)="onSwitchAuthMode()">
-        Switch to {{ isLoginMode ? "Sign Up" : "Sign In" }}
-      </button>
-    </form>
-    <div>
-      <p class="alert alert-danger mt-3" *ngIf="errMsg">{{ errMsg }}</p>
+        <!-- BUTTONS -->
+        <button class="btn btn-primary mt-4" style="background-color: rgb(10, 115, 156);" type="submit"
+          [disabled]="!authFormRef.valid">
+          {{ isLoginMode ? "Sign In" : "Sign Up" }}
+        </button>
+        <button class="btn btn-primary mt-4 mx-2" style="background-color: rgb(10, 115, 156);" type="button"
+          (click)="onSwitchAuthMode()">
+          Switch to {{ isLoginMode ? "Sign Up" : "Sign In" }}
+        </button>
+      </form>
+      <div>
+        <p class="alert alert-danger mt-3" *ngIf="errMsg">{{ errMsg }}</p>
+      </div>
     </div>
   </div>
 </div>

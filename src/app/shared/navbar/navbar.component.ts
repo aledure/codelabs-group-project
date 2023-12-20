@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpService } from '../services/http.service';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -12,10 +11,7 @@ export class NavbarComponent {
   show: boolean = false;
   isAuthenticated: boolean = false;
 
-  constructor(
-    private httpService: HttpService,
-    private authService: AuthService
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe((user) => {

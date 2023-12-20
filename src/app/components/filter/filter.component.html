@@ -1,66 +1,107 @@
-<div class="main-container">
+<div class="form-container">
   <div class="row">
-    <div class="row filter-row">
-      <div class="col-md-4">
-        <label for="bodyPart">Filter by Muscle Group:</label>
-        <select id="bodyPart" [(ngModel)]="selectedBodyPart" name="bodyPart" (change)="onBodyPartSelected()"
-          class="form-control dropdown-toggle" data-toggle="dropdown" aria-placeholder="Select Muscle Group">
-          <option>All</option>
-          <option>Back</option>
-          <option>Chest</option>
-          <option>Lower Arms</option>
-          <option>Upper Arms</option>
-          <option>Chest</option>
-          <option>Lower Legs</option>
-          <option>Upper Legs</option>
-          <option>Waist</option>
-          <option>Shoulders</option>
-          <option>Cardio</option>
-        </select>
-      </div>
+    <div class="col-sm-12 form-div">
+      <h2 class="mt-5">Create Routine</h2>
+      <form #routineForm="ngForm" class="form-group">
+        <div class="top-form">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" class="form-control" [(ngModel)]="routineTitle" required>
 
-      <div class="col-md-4">
-        <label for="bodyPart">Filter by Equipment:</label>
-        <select class="form-control dropdown-toggle" [(ngModel)]="selectedEquipment" (change)="onEquipmentSelected()"
-          id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          aria-placeholder="Select Equipment">
-          <option>Select Equipment</option>
-          <option>Body weight</option>
-          <option>Dumbbell</option>
-          <option>Barbell</option>
-          <option>Leverage Machine</option>
-          <option>Band</option>
-          <option>Cable</option>
-          <option>Bosu Ball</option>
-          <option>Kettlebell</option>
-        </select>
+          <label for="description">Description</label>
+          <input type="text" style="height: 4em;" id="description" name="description" class="form-control"
+            [(ngModel)]="routineDescription" required>
+
+          <label for="rest">Rest Duration (in seconds)</label>
+          <input type="number" id="rest" name="rest" class="form-control" [(ngModel)]="restDuration" required>
+        </div>
+
+        <mat-divider style="margin: 3em;"></mat-divider>
+
+        <!-- Lifts form -->
+        <div class="row">
+          <div class="col-sm-2 lift-container" *ngFor="let lift of selectedLifts; let i = index">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">{{ lift.name | titlecase }}</h4>
+                <label>Sets: </label>
+                <input type="number" [(ngModel)]="selectedLifts[i].sets" min="1" name="sets_{{i}}" />
+                <label>Reps: </label>
+                <input type="number" [(ngModel)]="selectedLifts[i].reps" min="1" name="reps_{{i}}" />
+                <button class="btn btn-danger" (click)="removeLift(i)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn save-button"
+          (click)="saveRoutine(routineTitle, routineDescription, restDuration)">Save</button>
+      </form>
+    </div>
+
+
+    <!--filters-->
+    <div class="row">
+      <div class="row filter-row">
+        <div class="col-md-4">
+          <label for="bodyPart">Filter by Muscle Group:</label>
+          <select id="bodyPart" [(ngModel)]="selectedBodyPart" name="bodyPart" (change)="onBodyPartSelected()"
+            class="form-control dropdown-toggle" data-toggle="dropdown" aria-placeholder="Select Muscle Group">
+            <option>All</option>
+            <option>Back</option>
+            <option>Chest</option>
+            <option>Lower Arms</option>
+            <option>Upper Arms</option>
+            <option>Chest</option>
+            <option>Lower Legs</option>
+            <option>Upper Legs</option>
+            <option>Waist</option>
+            <option>Shoulders</option>
+            <option>Cardio</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="bodyPart">Filter by Equipment:</label>
+          <select class="form-control dropdown-toggle" [(ngModel)]="selectedEquipment" (change)="onEquipmentSelected()"
+            id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            aria-placeholder="Select Equipment">
+            <option>Select Equipment</option>
+            <option>Body weight</option>
+            <option>Dumbbell</option>
+            <option>Barbell</option>
+            <option>Leverage Machine</option>
+            <option>Band</option>
+            <option>Cable</option>
+            <option>Bosu Ball</option>
+            <option>Kettlebell</option>
+          </select>
+        </div>
       </div>
     </div>
+
+    <!--lifts list-->
+    <mat-card class="mt-4" style="margin-bottom: 2em;">
+      <div class="col-sm-10 mt-2 search-menu">
+        <input type="text" class="form-control search-bar" [(ngModel)]="searchQuery" placeholder="Search...">
+        <button class="btn search-button">Search</button>
+      </div>
+      <div *ngIf="lifts.length != 0" class="lifts-list">
+        <ul class="mt-4">
+          <li *ngFor="let lift of lifts | search: searchQuery">
+            <span style="color: black;" class="lifts-row">
+              <img src="/assets/plus.png" matTooltip="Add lift" alt="Add" class="img-fluid rounded-circle add-icon"
+                style="width: 20px; height: 20px;" (click)="onLiftClick(lift)">
+              <a [routerLink]="['/lift', lift.id]">
+                <svg xmlns="http://www.w3.org/2000/svg" matTooltip="View detail" width="20px" height="20px"
+                  fill="currentColor" class="bi bi-search detail-icon" viewBox="0 0 16 16">
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                </svg>
+              </a>
+              {{ lift.name | titlecase}}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </mat-card>
   </div>
-
-  <mat-card class="mt-4">
-    <div class="col-md-10 mt-2 search-menu">
-      <input type="text" class="form-control search-bar" [(ngModel)]="searchQuery" placeholder="Search...">
-      <button class="btn search-button">Search</button>
-    </div>
-    <div *ngIf="lifts.length != 0" class="lifts-list">
-      <ul class="mt-4">
-        <li *ngFor="let lift of lifts | search: searchQuery">
-          <span style="color: black;" class="lifts-row">
-            <img src="/assets/plus.png" alt="Add" class="img-fluid rounded-circle add-icon"
-              style="width: 20px; height: 20px;">
-            <a [routerLink]="['/lift', lift.id]">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
-                class="bi bi-search detail-icon" viewBox="0 0 16 16">
-                <path
-                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-              </svg>
-            </a>
-            {{ lift.name | titlecase}}
-          </span>
-        </li>
-      </ul>
-    </div>
-  </mat-card>
-
-</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RoutineService } from 'src/app/shared/services/routine.service';
-import { AuthService } from 'src/app/shared/auth/auth.service';
+import { Lift } from 'src/app/shared/models/lift.model';
+import { Routine } from 'src/app/shared/models/routine.model';
 
 @Component({
   selector: 'app-routine-manager',
@@ -8,32 +9,21 @@ import { AuthService } from 'src/app/shared/auth/auth.service';
   styleUrls: ['./routine-manager.component.scss'],
 })
 export class RoutineManagerComponent {
-  constructor(
-    private routineService: RoutineService,
-    private authService: AuthService
-  ) {}
+  routine: Lift[] = [];
+  selectedLift: Lift;
+  lifts: Lift;
+
+  constructor(private routineService: RoutineService) {}
 
   onInit() {
-    console.log(localStorage.getItem('user'));
+    this.routineService.liftSelected$.subscribe((lift) => {
+      this.selectedLift = lift;
+      this.routine.push(this.selectedLift);
+      console.log('current routine: ' + this.routine);
+    });
   }
 
-  routines = this.routineService.getRoutines();
-
-  createRoutine(routineDetails: any): void {
-    console.log('User is authenticated: ' + this.authService.isAuthenticated());
-    if (this.authService.isAuthenticated()) {
-      // Get the current user from the authentication service
-      const currentUser = this.authService.getCurrentUser();
-      // Create a routine object to save to the database
-      const routine = {
-        userId: currentUser.id,
-        routineDetails: routineDetails,
-      };
-      this.routineService.addRoutine(routine);
-      console.log('data saved' + JSON.stringify(routine));
-    } else {
-      console.log('User is not authenticated');
-      console.log(routineDetails);
-    }
+  getLift(lift: Lift): void {
+    this.routineService.selectLift(lift);
   }
 }

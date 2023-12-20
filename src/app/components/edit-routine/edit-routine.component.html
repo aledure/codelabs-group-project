@@ -1,0 +1,12 @@
+<div *ngIf="routine">
+  <h2>{{ routine.title | titlecase }}</h2>
+  <p>Description: {{ routine.description }}</p>
+  <p>Rest Duration: {{ routine.restDuration }}</p>
+
+  <h3>Lifts</h3>
+  <ul>
+    <li *ngFor="let lift of routine.lifts">
+      {{ lift.name | titlecase }} - Sets: {{ lift.sets }}, Reps: {{ lift.reps }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,26 @@
+<div class="jumbotron">
+  <div class="container col-10-sm">
+    <div class="card">
+      <div class="text-center">
+        <h3 class="title-header">{{ routine.title | titlecase }}</h3>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Description</h5>
+        <p class="card-text">{{ routine.description }}</p>
+        <mat-divider></mat-divider>
+        <h3 class="card-title mt-3">Lifts</h3>
+        <div *ngFor="let lift of routine.lifts" class="bottom-card mb-2">
+          <h3 class="mb-2 lift-title">{{ lift.name | titlecase }}</h3>
+          <div class="card-body sets-container">
+            <!-- Nested ngFor loop to iterate through sets and reps -->
+            <div *ngFor="let set of getNumberArray(lift.sets)" class="d-inline-block mr-2">
+              <div class="circle">
+                <h4>{{ lift.reps }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

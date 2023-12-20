@@ -38,7 +38,7 @@ export class AuthComponent {
         console.log('Auth response success: ', res);
         {
           this.errMsg = null;
-          this.router.navigate(['home']);
+          this.router.navigate(['profile']);
         }
       },
       (err) => {

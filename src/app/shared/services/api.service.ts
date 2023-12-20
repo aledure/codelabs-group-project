@@ -36,7 +36,7 @@ export class ApiService {
       // If data is not in the cache, make an API request
       return this.http
         .get<Lift[]>(
-          `https://${this.apiUrl}/exercises?offset=0&limit=100`,
+          `https://${this.apiUrl}/exercises?offset=0&limit=1000`,
           this.getHeaders()
         )
         .pipe(
@@ -87,6 +87,13 @@ export class ApiService {
   getLiftsByEquipment(equipment: string): Observable<Lift[]> {
     return this.http.get<Lift[]>(
       `https://${this.apiUrl}/exercises/equipment/${equipment}?offset=0&limit=100`,
+      this.getHeaders()
+    );
+  }
+
+  getLiftById(id: number): Observable<Lift> {
+    return this.http.get<Lift>(
+      `https://${this.apiUrl}/exercises/exercise/${id}`,
       this.getHeaders()
     );
   }
