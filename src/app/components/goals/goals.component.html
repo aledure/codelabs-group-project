@@ -1,1 +1,124 @@
-<p>app-goals works!</p>
+<body class="min-h-[80vh] grid place-content-center bg-gradient-to-r from-customBlue to-customBlack mx-auto"
+  style="margin-top: 8em; width: 50vw;">
+  <div class="row">
+    <div class="col">
+      <!-- Weight Div -->
+      <div
+        class="bg-customWhite grid flex-auto min-h-[70vh] min-w-[70vh] max-h-[70vh] max-w-[70vh] rounded-2xl shadow-2xl">
+        <div class="grid place-content-center justify-center mb-4">
+          <header class="text-5xl text-customOrange">Your Weight Goals!</header>
+        </div>
+        <div *ngIf="!editMode">
+          <div class="grid place-content-evenly">
+            <div class="">
+              <header class="text-2xl">
+                Start Weight:
+                <p>{{ weightForm.get("_wStart").value }} lbs</p>
+              </header>
+              <hr />
+            </div>
+            <div>
+              <header class="text-2xl grid place-content-center">
+                Current Weight:
+                <p>{{ weightForm.get("_wCurrent").value }} lbs</p>
+              </header>
+            </div>
+            <hr />
+            <div>
+              <header class="text-2xl">
+                Goal Weight:
+                <p>{{ weightForm.get("_wGoal").value }} lbs</p>
+              </header>
+            </div>
+            <button
+              class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border-customBlack border-solid border-2"
+              (click)="toggleEditMode()">
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="editMode">
+          <!-- Edit mode -->
+          <form [formGroup]="weightForm">
+            <div class="grid place-content-evenly">
+              <label for="_wStart" class="text-2xl">Start Weight:</label>
+              <input type="number" formControlName="_wStart"
+                class="text-2xl appearance-none border-2 border-customBlack rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-customOrange" />
+
+              <label for="_wCurrent" class="text-2xl">Current Weight:</label>
+              <input type="number" formControlName="_wCurrent"
+                class="text-2xl bg-gray-200 appearance-none border-2 border-customBlack rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-customOrange" />
+
+              <label for="_wGoal" class="text-2xl">Goal Weight:</label>
+              <input type="number" formControlName="_wGoal"
+                class="text-2xl bg-gray-200 appearance-none border-2 border-customBlack rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-customOrange" /><button
+                class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border-customBlack border-solid border-2"
+                (click)="saveChanges()" (click)="toggleEditMode()">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Goals Div -->
+    <div
+      class="bg-customWhite grid place-content-center min-h-[70vh] min-w-[70vh] max-h-[70vh] max-w-[70vh] rounded-2xl shadow-2xl">
+      <div class="grid place-content-start justify-center mb-4">
+        <header class="text-5xl text-customOrange">Your Custom Goals!</header>
+      </div>
+      <div *ngFor="let submittedGoal of submittedGoals; let i = index">
+        <p class="text-2xl" *ngIf="editingCreatedGoal !== submittedGoal; else editMode">
+          {{ submittedGoal }}
+
+          <button
+            class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-2.5 py-1 me-2 mb-2 border-customBlack border-solid border-2"
+            (click)="editCreatedGoal(submittedGoal)">
+            Edit
+          </button>
+          <button
+            class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-2.5 py-1 me-2 mb-2 border-customBlack border-solid border-2"
+            (click)="removeCreatedGoal(i)">
+            Remove
+          </button>
+        </p>
+
+        <ng-template #editMode>
+          <!-- Edit mode -->
+          <input type="text" [ngModel]="tempGoal" (ngModelChange)="tempGoal = $event"
+            class="text-2xl appearance-none border-2 border-customBlack rounded w-full py-0.5 px-1 text-gray-700 leading-tight focus:outline-none focus:border-customOrange" />
+          <button
+            class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-2.5 py-1 me-2 mb-2 border-customBlack border-solid border-2"
+            (click)="updateCreatedGoal(i)">
+            Update
+          </button>
+          <button
+            class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-2.5 py-1 me-2 mb-2 border-customBlack border-solid border-2"
+            (click)="editingCreatedGoal = null">
+            Cancel
+          </button>
+        </ng-template>
+      </div>
+      <div>
+        <div *ngIf="cGEdit">
+          <form [formGroup]="goalForm">
+            <input type="text" formControlName="goal" placeholder="Enter custom goal"
+              class="text-2xl appearance-none border-2 border-customBlack rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-customOrange" />
+            <button
+              class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border-customBlack border-solid border-2"
+              (click)="submitGoal()">
+              Submit
+            </button>
+          </form>
+        </div>
+        <button
+          class="bg-customBeige enabled:hover:bg-customOrange enabled:active:bg-customOrange focus:outline-none focus:ring focus:ring-customBlack rounded-lg text-sm px-5 py-2.5 me-2 mb-2 border-customBlack border-solid border-2"
+          *ngIf="!cGEdit" (click)="addCGButton()">
+          Add Custom Goal
+        </button>
+      </div>
+    </div>
+  </div>
+</body>

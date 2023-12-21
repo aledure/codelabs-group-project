@@ -19,6 +19,7 @@ const appRoutes: Routes = [
   { path: 'routines/new', component: FilterComponent },
   { path: 'edit/:id', component: EditRoutineComponent },
   { path: 'start/:id', component: ActiveRoutineComponent },
+  { path: 'goals', component: GoalsComponent, canActivate: [AuthGuard] },
 
   {
     path: 'lift/:id',
