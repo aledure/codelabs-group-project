@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './shared/auth/auth.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +45,7 @@ import { LandingComponent } from './components/landing/landing.component';
     MatCardModule,
     MatButtonModule,
     MatDividerModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
